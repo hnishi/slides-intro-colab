@@ -1,75 +1,98 @@
 ---
 marp: true
-title: Marp CLI example
-description: Hosting Marp slide deck on the web
-theme: uncover
+class: invert
 paginate: true
-_paginate: false
 ---
 
-![bg](./assets/gradient.jpg)
-
-# <!--fit--> Marp CLI example
-
-Hosting Marp slide deck on the web
-
-https://github.com/yhatt/marp-cli-example
-
-<style scoped>a { color: #eee; }</style>
-
-<!-- This is presenter note. You can write down notes through HTML comment. -->
-
+# Google Colaboratory の使い方
 ---
 
-![Marp bg 60%](https://raw.githubusercontent.com/marp-team/marp/master/marp.png)
+## Colaboratory とは
+
+- [Colaboratory](https://colab.research.google.com/) （略して「Colab」）は、Google Researchの製品
+- ブラウザ上で任意のPythonコードを書いて実行することができる
+- 特に機械学習、データ分析、教育などに適している
+- GPUを含むコンピューティングリソースへの無料アクセスを提供
+- セットアップを必要としないJupyterノートブックのホスティングサービス
+
+参考: [Colaboratory – Google](https://research.google.com/colaboratory/faq.html)
 
 ---
 
-![bg](#123)
-![](#fff)
+## 注意事項
 
-##### <!--fit--> [Marp CLI](https://github.com/marp-team/marp-cli) + [GitHub Pages](https://github.com/pages) | [Netlify](https://www.netlify.com/) | [Vercel](https://vercel.com/)
+- リソースの制限がある
+- 実行時間の上限は 12 時間
+- しばらく操作がない場合もセッションが切れる
+- 割り当てられるメモリのサイズや CPU, GPU の種類は時と場合による（メモリ不足でエラーになる場合はセッションを再起動することで、より大きなリソースが割り当てられる場合もある）
+- GPU/TPU を使い過ぎると一時的に GPU/TPU の利用ができなくなる場合がある
+- 主に割り当てられる GPU は下記
 
-##### <!--fit--> 👉 The easiest way to host<br />your Marp deck on the web
+> The GPUs available in Colab often include Nvidia K80s, T4s, P4s and P100s.
 
----
-
-![bg right 60%](https://icongr.am/octicons/mark-github.svg)
-
-## **[GitHub Pages](https://github.com/pages)**
-
-#### Ready to write & host your deck!
-
-[![Use this as template h:1.5em](https://img.shields.io/badge/-Use%20this%20as%20template-brightgreen?style=for-the-badge&logo=github)](https://github.com/yhatt/marp-cli-example/generate)
+参考: [Colaboratory – Google](https://research.google.com/colaboratory/faq.html)
 
 ---
 
-![bg right 60%](https://www.netlify.com/img/press/logos/logomark.svg)
+## セッションで GPU を有効にする方法
 
-## **[Netlify](https://www.netlify.com/)**
+Runtime --> Change runtime type
 
-#### Ready to write & host your deck!
-
-[![Deploy to Netlify h:1.5em](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yhatt/marp-cli-example)
+![width:700px](./assets/2021-04-07-22-08-33.png)
 
 ---
 
-![bg right 60%](https://icongr.am/simple/zeit.svg)
+## セッションの管理方法
 
-## **[Vercel](https://vercel.com/)**
+不要なセッションの停止
 
-#### Ready to write & host your deck!
-
-[![Deploy to Vercel h:1.5em](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/yhatt/marp-cli-example)
+Runtime --> Manage Sessions --> Terminate
 
 ---
 
-### <!--fit--> :ok_hand:
+## ライブラリ等を追加する場合
+
+セルで ! の後に shell のコマンドを記載して実行可能です。
+
+```
+!pip install foo
+```
+
+もしくは下記のようにすることで、shell を複数行に渡って記述できます。
+
+```
+%%shell
+pip install foo
+wget https://example.com/bar
+```
 
 ---
 
-![bg 40% opacity blur](https://avatars1.githubusercontent.com/u/3993388?v=4)
+## Google Drive をマウントする方法
 
-### Created by Yuki Hattori ([@yhatt](https://github.com/yhatt))
+Google drive アイコンをクリックするだけ（ただし private notebook のみ）
 
-https://github.com/yhatt/marp-cli-example
+> Colab integration with Google Drive just got better. Authenticate only once per notebook. No authentication codes are necessary for private notebooks when using the 'Mount Drive' button in the file browser.
+
+https://twitter.com/GoogleColab/status/1226929213560610818
+
+下記を入力してセルを実行することでもマウント可能です。
+
+```
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+Google drive へのアクセスを許可するための認証の手順が表示されるので、それに従ってください。
+
+---
+
+## その他 tips
+
+- Shift + Enter で現在のセルを実行できます
+
+---
+
+Let’s get started!
+
+[Google Colaboratory](https://colab.research.google.com/)
